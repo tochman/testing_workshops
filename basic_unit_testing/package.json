@@ -1,0 +1,15 @@
+{
+  "name": "basic_unit_testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
+    "sinon": "^10.0.0",
+    "sinon-chai": "^3.6.0"
+  },
+  "scripts": {
+    "test": "mocha --recursive --exit specs"
+  }
+}
