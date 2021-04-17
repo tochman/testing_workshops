@@ -13,10 +13,11 @@
       ],
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "args": [
+        "-u", "bdd-lazy-var/global",
         "--recursive",
         "--exit",
         "--colors",
-        "${workspaceFolder}/specs/**/*.spec.js"
+        "${workspaceFolder}/specs/**/*.spec.js",
       ]
     }
   ]
