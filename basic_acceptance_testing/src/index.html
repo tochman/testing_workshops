@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E2E Demo</title>
+</head>
+
+<body>
+  <h1>Hello User!</h1>
+  <form id="registration">
+    <input id="name" />
+    <input id="email" />
+    <input type="submit" value="Register" id="submit-form">
+  </form>
+
+  <div id="confirmation-message"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('registration')
+      const messageNode = document.getElementById('confirmation-message')
+      form.addEventListener('submit', event => {
+        event.preventDefault()
+        if (form.children.name.value === '') {
+          messageNode.innerText = 'You need to fill in your name!'
+        } else if (form.children.email.value === '') {
+          messageNode.innerText = 'You need to fill in your email!'
+        } else {
+          form.style.visibility = "hidden"
+          messageNode.innerText = 'Thank you for signing up!'
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>

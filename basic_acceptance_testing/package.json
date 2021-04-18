@@ -1,0 +1,14 @@
+{
+  "name": "basic_acceptance_testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "cypress": "^7.1.0",
+    "superstatic": "^7.1.0"
+  },
+  "scripts": {
+    "start": "superstatic src",
+    "cy:open": "cypress open"
+  }
+}
