@@ -1,4 +1,3 @@
-
 class Person {
   constructor(options) {
     this.firstName = options.firstName
@@ -21,9 +20,6 @@ class Person {
   fullDetails() {
     return `${this.fullName()}, ${this.age} years old`
   }
-
-
-
 }
 
 module.exports = Person

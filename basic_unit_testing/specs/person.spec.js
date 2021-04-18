@@ -6,20 +6,20 @@ use(sinonChai)
 global.expect = expect;
 
 
-
 describe('instance of Person', () => {
   subject(() => new Person($options))
 
-  describe('properties setters on instantiation', () => {
+  describe('properties on instantiation', () => {
 
     def('options', () => ({ firstName: 'Jane', lastName: 'Doe', age: 25 }))
+    
     it('is expected to be an instance of Person class', () => {
       expect($subject).to.be.instanceOf(Person)
     });
 
     it(() => is.expected.to.haveOwnProperty('firstName').which.equal('Jane'))
+    
     its('firstName', () => is.expected.to.equal('Jane'))
-
 
     it('is expected to have property firstName', () => {
       expect($subject)
@@ -81,9 +81,9 @@ describe('instance of Person', () => {
         expect($subject.fullName()).to.equal('Thomas Ochman')
       });
     });
+
     describe('fullDetails', () => {
       def('options', () => ({ firstName: 'Jane', lastName: 'Doe', age: 25 }))
-
 
       let fullNameSpy, response
 
