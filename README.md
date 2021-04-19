@@ -1,5 +1,11 @@
 ## Testing JavaScript Applications
 
+Materials for online workshop on test automation in JavaScript. 
+
+### Reading materials
+
+[What Is Test Automation? A Simple, Clear Introduction](https://www.testim.io/blog/what-is-test-automation/)
+
 ### Workshop materials
 
 This repository contains code used in a 3 part series on testing JavaScript applications
