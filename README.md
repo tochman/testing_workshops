@@ -2,6 +2,9 @@
 
 Materials for online workshop on test automation in JavaScript. 
 
+Test automation is the practice of running tests automatically, managing test data, and utilizing results to improve software quality. It’s primarily a quality assurance measure, but its activities involve the commitment of the entire software production team. This course is for anyone who wants to learn how to incorporate automated testing in their development flow. We will be covering a variety of tools, frameworks and libraries to cover a broad range of testing strategies.
+
+
 ### Reading materials
 
 [What Is Test Automation? A Simple, Clear Introduction](https://www.testim.io/blog/what-is-test-automation/)
