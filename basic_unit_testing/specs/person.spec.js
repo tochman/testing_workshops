@@ -92,12 +92,12 @@ describe('instance of Person', () => {
         fullNameSpy = sinon.spy($subject, 'fullName')
         response = $subject.fullDetails()
       });
-
+      
       it('is expected to call on fullName', () => {
         // 2. Assert the fullName is being used by fullDetails
         expect(fullNameSpy).to.have.been.calledOnce
       });
-
+      
       it('is expected to return text', () => {
         expect(response).to.equal('Jane Doe, 25 years old')
       });

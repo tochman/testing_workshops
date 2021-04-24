@@ -8,4 +8,5 @@ This repository contains code used in a 3 part series on testing JavaScript appl
 
 - Part 1: **Introduction and Unit Testing**
 - Part 2: **Recap and Acceptance Test using CypressIO**
-- Part 3: **Full Acceptance - Unit test Cycle when developing a feature**
+- Part 3: **Testing the back-end Mocha - Chai - Supertest**
+- Part 4: **Full Acceptance - Unit test Cycle when developing a feature**
