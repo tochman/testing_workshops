@@ -1,2 +1,3 @@
 **/node_modules
 node_modules
+basic_smart_contract/src/artifacts/build-info/**
