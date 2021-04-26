@@ -21,17 +21,24 @@ contract Purchase {
         status = "deployed";
     }
 
-    function initiate( string memory service, uint256 amount, string memory unit) external {
-      // 1. check if the signer is the buyer
-      if (msg.sender == buyerAddress) {
-      // 3. if YES: Then move on and set the req Service
-        // console.log(msg.sender);
-        status = "initiated";
-        requiredService = RequiredService(service, amount, unit);
+    function initiate(
+        string memory service,
+        uint256 amount,
+        string memory unit
+    ) external {
+        // 1. check if the signer is the buyer
+        // require(msg.sender == buyerAddress, "Only The Buyer!");
+        // status = "initiated";
+        // requiredService = RequiredService(service, amount, unit);
+        if (msg.sender == buyerAddress) {
+        // 3. if YES: Then move on and set the req Service
+          // console.log(msg.sender);
+          status = "initiated";
+          requiredService = RequiredService(service, amount, unit);
 
-      } else {
-      // 2. if NOT: Get the hell out of here
+        } else {
+        // 2. if NOT: Get the hell out of here
 
-      }
+        }
     }
 }
