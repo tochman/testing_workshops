@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const { waffle } = require('hardhat')
 const Purchase = require('../src/artifacts/contracts/Purchase.sol/Purchase.json')
 
-
+let contract
 describe('Purchase', async () => {
   const [serviceProvider, buyer, randomWallet] = waffle.provider.getWallets()
 
@@ -23,14 +23,11 @@ describe('Purchase', async () => {
   });
 
   describe('Buyer can initiate the purchase process', () => {
-    
+
     beforeEach(async () => {
-      // contract.connect(buyer)
-      // await buyer.signMessage(contract.initiate('Software Development', 10, 'h'))
-      // await contract.initiate('Software Development', 10, 'h')
       await contract.connect(buyer).initiate('Software Development', 10, 'h')
       requiredService = await contract.requiredService()
-      expectedrequiredService = {service: 'Software Development', amount: 10, unit: 'h'}
+      expectedrequiredService = { service: 'Software Development', amount: 10, unit: 'h' }
     });
 
     it('is expected to set contract status to "initiated"', async () => {
@@ -51,24 +48,12 @@ describe('Purchase', async () => {
 
   });
 
-  describe('Random Wallet can NOT initiate the purchase process', () => {
-    
-    beforeEach(async () => {
-      // contract.connect(buyer)
-      // await buyer.signMessage(contract.initiate('Software Development', 10, 'h'))
-      // await contract.initiate('Software Development', 10, 'h')
-      await contract.connect(randomWallet).initiate('Software Development', 10, 'h')
-      requiredService = await contract.requiredService()
-      expectedrequiredService = {service: 'Software Development', amount: 10, unit: 'h'}
+  describe('Random Wallet can NOT initiate the purchase process', async () => {
+    it('is expected to be reverted with message', async () => {
+      await expect(
+        contract.connect(randomWallet).initiate('Software Development', 10, 'h')
+      )
+        .to.be.revertedWith("You can't perform this operation")
     });
-
-    it('is expected to set contract status to "initiated"', async () => {
-      expect(await contract.status()).to.eql('deployed')
-    });
-
-    // it('is expected to set contract requiredService service to "Software Development"', async () => {
-    //   expect(requiredService[0]).to.eql(null)
-    // });
-
   });
 });
