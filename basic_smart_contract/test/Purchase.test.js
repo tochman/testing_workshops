@@ -24,26 +24,35 @@ describe('Purchase', async () => {
 
   describe('Buyer can initiate the purchase process', () => {
 
-    beforeEach(async () => {
-      await contract.connect(buyer).initiate('Software Development', 10, 'h')
-      requiredService = await contract.requiredService()
-      expectedrequiredService = { service: 'Software Development', amount: 10, unit: 'h' }
+    describe('and pass in reqested service', () => {
+
+      beforeEach(async () => {
+        await contract.connect(buyer).initiate('Software Development', 10, 'h')
+        requiredService = await contract.requiredService()
+        expectedrequiredService = { service: 'Software Development', amount: 10, unit: 'h' }
+      });
+
+      it('is expected to set contract status to "initiated"', async () => {
+        expect(await contract.status()).to.eql(1)
+      });
+
+      it('is expected to set contract requiredService service to "Software Development"', async () => {
+        expect(requiredService[0]).to.eql(expectedrequiredService.service)
+      });
+
+      it('is expected to set contract requiredService amount to 10', async () => {
+        expect(parseInt(requiredService[1])).to.eql(expectedrequiredService.amount)
+      });
+
+      it('is expected to set contract requiredService unit to "h"', async () => {
+        expect(requiredService[2]).to.eql(expectedrequiredService.unit)
+      });
     });
 
-    it('is expected to set contract status to "initiated"', async () => {
-      expect(await contract.status()).to.eql('initiated')
-    });
-
-    it('is expected to set contract requiredService service to "Software Development"', async () => {
-      expect(requiredService[0]).to.eql(expectedrequiredService.service)
-    });
-
-    it('is expected to set contract requiredService amount to 10', async () => {
-      expect(parseInt(requiredService[1])).to.eql(expectedrequiredService.amount)
-    });
-
-    it('is expected to set contract requiredService unit to "h"', async () => {
-      expect(requiredService[2]).to.eql(expectedrequiredService.unit)
+    it('is expected to emit "Initialize" event', async () => {
+      await expect(contract.connect(buyer).initiate('Software Development', 10, 'h'))
+      .to.emit(contract, 'Initialize')
+      .withArgs(buyer.address, 'Software Development', 10, 'h');
     });
 
   });

@@ -6,19 +6,29 @@ import "hardhat/console.sol";
 contract Purchase {
     address public buyerAddress;
     address public serviceProviderAddress;
-    string public status;
     struct RequiredService {
         string service;
         uint256 amount;
         string unit;
     }
 
+    enum ProcessStatus {
+        Deployed,
+        Initiated,
+        InProgress,
+        Delivered,
+        Accepted,
+        Finalized
+    }
+
+    event Initialize(address indexed from, string service, uint256 amount, string unit);
+
     RequiredService public requiredService;
+    ProcessStatus public status = ProcessStatus.Delivered;
 
     constructor(address _buyerAddress) {
         buyerAddress = _buyerAddress;
         serviceProviderAddress = msg.sender;
-        status = "deployed";
     }
 
     function initiate(
@@ -27,7 +37,8 @@ contract Purchase {
         string memory unit
     ) external {
         require(msg.sender == buyerAddress, "You can't perform this operation");
-        status = "initiated";
+        status = ProcessStatus.Initiated;
         requiredService = RequiredService(service, amount, unit);
+        emit Initialize(msg.sender, service, amount, unit);
     }
 }
