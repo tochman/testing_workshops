@@ -16,7 +16,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:hardhat": "npx hardhat test"
+    "test:hardhat": "npx hardhat tests",
+    "test:e2e": "synpress run  -c 'pluginsFile: \"./plugins/index.js\"'"
   },
   "eslintConfig": {
     "extends": [
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@synthetixio/synpress": "^0.8.4",
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.1.4",
