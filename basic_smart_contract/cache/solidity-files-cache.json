@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/thomasochman/Projects/testing_workshops/basic_smart_contract/contracts/Purchase.sol": {
-      "lastModificationDate": 1619530823071,
-      "contentHash": "21807a44cc6f2a890d7535b764694489",
+      "lastModificationDate": 1619932847809,
+      "contentHash": "9607066fb4ae0307ffabed849ae319f0",
       "sourceName": "contracts/Purchase.sol",
       "solcConfig": {
         "version": "0.8.4",

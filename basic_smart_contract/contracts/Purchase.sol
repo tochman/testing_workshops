@@ -8,7 +8,7 @@ contract Purchase {
     address public serviceProviderAddress;
     struct RequiredService {
         string service;
-        uint256 amount;
+        uint32 amount;
         string unit;
     }
 
@@ -21,7 +21,12 @@ contract Purchase {
         Finalized
     }
 
-    event Initialize(address indexed from, string service, uint256 amount, string unit);
+    event Initialize(
+        address indexed from,
+        string service,
+        uint32 amount,
+        string unit
+    );
 
     RequiredService public requiredService;
     ProcessStatus public status = ProcessStatus.Delivered;
@@ -33,10 +38,11 @@ contract Purchase {
 
     function initiate(
         string memory service,
-        uint256 amount,
+        uint32 amount,
         string memory unit
     ) external {
-        require(msg.sender == buyerAddress, "You can't perform this operation");
+        // require(msg.sender != serviceProviderAddress, "It does not make sense to perform that operation!");
+        require(msg.sender == buyerAddress, msg.sender != serviceProviderAddress ?  "You can't perform this operation" : "It does not make sense to perform that operation!");
         status = ProcessStatus.Initiated;
         requiredService = RequiredService(service, amount, unit);
         emit Initialize(msg.sender, service, amount, unit);

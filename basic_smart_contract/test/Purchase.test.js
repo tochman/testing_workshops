@@ -57,12 +57,24 @@ describe('Purchase', async () => {
 
   });
 
-  describe('Random Wallet can NOT initiate the purchase process', async () => {
-    it('is expected to be reverted with message', async () => {
-      await expect(
-        contract.connect(randomWallet).initiate('Software Development', 10, 'h')
-      )
-        .to.be.revertedWith("You can't perform this operation")
+  describe.only('Sad path cases', () => {
+    describe('Random Wallet can NOT initiate the purchase process as Buyes', async () => {
+      it('is expected to be reverted with message', async () => {
+        await expect(
+          contract.connect(randomWallet).initiate('Software Development', 10, 'h')
+        )
+          .to.be.revertedWith("You can't perform this operation")
+      });
+    });
+
+    describe('Service Provider can NOT initiate the purchase process as Buyes', async () => {
+      it('is expected to be reverted with message', async () => {
+        await expect(
+          contract.connect(serviceProvider).initiate('Software Development', 10, 'h')
+        )
+          .to.be.revertedWith("It does not make sense to perform that operation!")
+      });
     });
   });
+
 });
