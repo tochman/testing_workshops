@@ -12,12 +12,12 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "craco start",
+    "build": "craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:hardhat": "npx hardhat tests",
-    "test:e2e": "synpress run  -c 'pluginsFile: \"./plugins/index.js\"'"
+    "test:e2e": "yarn build && synpress run"
   },
   "eslintConfig": {
     "extends": [
@@ -38,10 +38,12 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^6.1.2",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@synthetixio/synpress": "^0.8.4",
     "chai": "^4.3.4",
+    "craco-babel-loader": "^0.1.4",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.1.4",
     "hardhat": "^2.2.1"
