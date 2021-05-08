@@ -5,7 +5,7 @@
     "types": [
       "../../node_modules/cypress",
       "../../node_modules/@types/puppeteer-core",
-      "../../node_modules/@synthetixio/synpress/support",
+      // "../../node_modules/@synthetixio/synpress/support",
       "../../node_modules/cypress-wait-until",
       "../../node_modules/@testing-library/cypress"
     ],
