@@ -1,37 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import { ethers } from 'ethers'
-import Purchase from "./artifacts/contracts/Purchase.sol/Purchase.json";
+import detectEthereumProvider from '@metamask/detect-provider'
 
-const contractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3"
+// import { ethers } from 'ethers'
+
+// 1. Make sure that the app knows who I am
+// 2. Build an interface to input the Buyers address and get the info needed to deploy the contract
+// 3. Deploy the Purchase contract
 
 const App = () => {
-  const [status, setStatus ] = useState()
+  const [address, setAddress ] = useState("Loading...")
 
   const requestAccount = async () => {
-    await window.ethereum.request({method: "eth_requestAccount"})
-  }
-
-  async function fetchStatus() {
-    if (typeof window.ethereum !== 'undefined') {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const contract = new ethers.Contract(contractAddress, Purchase.abi, provider)
-      try {
-        const data = await contract.requiredService()
-        console.log('data: ', data)
-        setStatus(data)
-      } catch (err) {
-        console.log("Error: ", err)
-      }
-    }    
+    const provider = await detectEthereumProvider();
+    if (provider) {
+      return provider.selectedAddress
+    } else {
+      return "No address can be foiund, please install MetaMask"
+    }
   }
 
   useEffect(() => {
-    fetchStatus()
+    requestAccount().then(address => setAddress(address))
   }, [])
   return (
     <>
       <h1>Purchase Contract</h1>
-      <p>{status}</p>
+      <p>{address}</p>
     </>
   )
 }
