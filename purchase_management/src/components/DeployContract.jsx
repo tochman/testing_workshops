@@ -11,8 +11,8 @@ const DeployContract = ({ provider }) => {
     const contractFactory = ContractFactory.fromSolidity(Purchase, signer)
     const contract = await contractFactory.deploy(buyerAddress)
     await contract.deployed()
-    debugger
-    setContract(contract.address)
+    // debugger
+    setContract(contract)
   }
   return (
     <>

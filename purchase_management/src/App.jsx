@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 
 import detectEthereumProvider from '@metamask/detect-provider'
 import DeployConstract from "./components/DeployContract";
+import ViewContract from "./components/ViewContract";
 
 // 1. Make sure that the app knows who I am
 // 2. Build an interface to input the Buyers address and get the info needed to deploy the contract
@@ -34,7 +35,7 @@ const App = () => {
       <h1>Purchase Contract</h1>
       <p>Your address is: {address}</p>
       <DeployConstract provider={w3provider} />
-  
+      <ViewContract provider={w3provider} />
     </>
   )
 }
