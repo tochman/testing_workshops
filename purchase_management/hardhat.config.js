@@ -11,7 +11,7 @@ module.exports = {
   },
   networks: {
     hardhat: {
-      chainId: 1337,
+      chainId: 1337
     }
   }
 };

@@ -4,11 +4,12 @@ import Purchase from '../artifacts/contracts/Purchase.sol/Purchase.json'
 
 const DeployContract = ({ provider }) => {
   const [buyerAddress, setBuyerAddress] = useState('')
+  
   const deployContract = async () => {
-    const signer = provider.getSigner()
+    const signer = provider.getSigner(window.ethereum.selectedAddress)
     const contractFactory = ContractFactory.fromSolidity(Purchase, signer)
-    contractFactory.attach(window.ethereum.selectedAddress)
     const contract = await contractFactory.deploy(buyerAddress)
+    await contract.deployed()
     debugger
   }
   return (
