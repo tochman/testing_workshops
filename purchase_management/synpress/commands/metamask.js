@@ -240,6 +240,7 @@ module.exports = {
     return walletAddress;
   },
   initialSetup: async ({ secretWords, network, password }) => {
+    debugger
     const isCustomNetwork =
       process.env.NETWORK_NAME && process.env.RPC_URL && process.env.CHAIN_ID;
 

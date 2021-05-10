@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Purchase from '../artifacts/contracts/Purchase.sol/Purchase.json'
 import { ethers } from 'ethers'
-import { deployContract } from 'ethereum-waffle'
 const ViewContract = ({ provider }) => {
   const [contractAddress, setContractAddress] = useState('')
   const [contract, setContract] = useState()
@@ -12,7 +11,7 @@ const ViewContract = ({ provider }) => {
     const contractFactory = new ethers.Contract(address, Purchase.abi, provider)
     let deployedContract = contractFactory.attach(address)
     setContract(deployedContract)
-    setStatus(await deployContract.status())
+    setStatus(await deployedContract.status())
   }
 
 

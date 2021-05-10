@@ -36,7 +36,7 @@ contract Purchase {
     );
 
     RequiredService public requiredService;
-    ProcessStatus public status = ProcessStatus.Delivered;
+    ProcessStatus public status = ProcessStatus.Deployed;
 
     constructor(address _buyerAddress) {
         buyerAddress = _buyerAddress;

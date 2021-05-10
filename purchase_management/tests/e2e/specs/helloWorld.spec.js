@@ -1,29 +1,26 @@
-import Page from '../pages/page'
+import Page from '../pages/page';
 
-const page = new Page()
+const page = new Page();
 
-let metaMaskWalletAddress
+let metamaskWalletAddress;
 
-describe('Display page', () => {
-  before(async () => {
-    let wallet = await page.getMetamaskWalletAddress()
-    metaMaskWalletAddress = wallet.address
-
-    page.visit()
-  });
-
-  it.only(`should login with success`, () => {
-    page.connectMetamaskWallet();
-    page.acceptMetamaskAccessRequest();
-    page.waitUntilLoggedIn();
-    page.getLoggedInWalletAddress().then((exchangeWalletAddress) => {
-      const formattedMetamaskWalletAddress =
-        metaMaskWalletAddress.slice(0, 5) + '...' + metaMaskWalletAddress.slice(-5);
-      expect(exchangeWalletAddress).to.equal(formattedMetamaskWalletAddress.toLowerCase());
-    });
-  });
-
-  it('is expected to show "Purchase Contract', () => {
-    cy.get('body').should('contain.text', "Purchase Contract")
-  });
+describe('Wallet tests', () => {
+	before(() => {
+		page.getMetamaskWalletAddress().then((address) => {
+			metamaskWalletAddress = address;
+		});
+		page.visit();
+	});
+	context('Connect metamask wallet', () => {
+		it(`should login with success`, () => {
+			page.connectMetamaskWallet();
+			page.acceptMetamaskAccessRequest();
+			page.waitUntilLoggedIn();
+			page.getLoggedInWalletAddress().then((walletAddress) => {
+				const formattedMetamaskWalletAddress =
+					metamaskWalletAddress.slice(0, 5) + '...' + metamaskWalletAddress.slice(-5);
+				expect(walletAddress).to.equal(formattedMetamaskWalletAddress.toLowerCase());
+			});
+		});
+	});
 });
