@@ -21,8 +21,15 @@ contract Purchase {
         Finalized
     }
 
+    event InitialDeploy(
+        address indexed from,
+        address indexed to,
+        string message
+    );
+
     event Initialize(
         address indexed from,
+        address indexed to,
         string service,
         uint32 amount,
         string unit
@@ -34,6 +41,7 @@ contract Purchase {
     constructor(address _buyerAddress) {
         buyerAddress = _buyerAddress;
         serviceProviderAddress = msg.sender;
+        emit InitialDeploy(msg.sender, buyerAddress, 'An invite to purchase services has been created');
     }
 
     function initiate(
@@ -41,10 +49,14 @@ contract Purchase {
         uint32 amount,
         string memory unit
     ) external {
-        // require(msg.sender != serviceProviderAddress, "It does not make sense to perform that operation!");
-        require(msg.sender == buyerAddress, msg.sender != serviceProviderAddress ?  "You can't perform this operation" : "It does not make sense to perform that operation!");
+        require(
+            msg.sender == buyerAddress,
+            msg.sender != serviceProviderAddress
+                ? "You can't perform this operation"
+                : "It does not make sense to perform that operation!"
+        );
         status = ProcessStatus.Initiated;
         requiredService = RequiredService(service, amount, unit);
-        emit Initialize(msg.sender, service, amount, unit);
+        emit Initialize(msg.sender, serviceProviderAddress, service, amount, unit);
     }
 }

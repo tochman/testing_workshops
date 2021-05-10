@@ -16,10 +16,7 @@ const App = () => {
     const provider = await detectEthereumProvider();
     if (provider) {
       !provider.isConnected() && await window.ethereum.enable()
-      // console.log(provider.getNetwork().name)
       const web3Provider = new ethers.providers.Web3Provider(window.ethereum)
-      console.log(await web3Provider.getNetwork())
-      debugger
       return web3Provider
     } else {
       return "No address can be found, please install MetaMask"

@@ -18,7 +18,7 @@
     "build": "craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:hardhat": "npx hardhat tests",
+    "test:hardhat": "npx hardhat test",
     "test:e2e": "METAMASK_VERSION=latest NETWORK_NAME=localhost RPC_URL=http://127.0.0.1:8545/ CHAIN_ID=1337 SECRET_WORDS='apple, logic, early, aerobic, high, earth, there, ten, girl, elephant, luxury, sunny' start-server-and-test 'yarn build && yarn start:silent' http-get://localhost:3000 'synpress run'"
   },
   "eslintConfig": {
