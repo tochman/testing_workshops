@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 // import helpers from "../support/helpers";
 const helpers = require('../support/helpers')
+const puppeteer = require('../support/puppeteer');
+const metamask = require('../support/metamask');
 /**
  * @type {Cypress.PluginConfig}
  */
@@ -24,6 +26,7 @@ module.exports = (on, config) => {
     // metamask welcome screen blocks cypress from loading
     if (browser.name === 'chrome') {
       arguments_.args.push(
+        '--remote-debugging-port=9222',
         '--disable-background-timer-throttling',
         '--disable-backgrounding-occluded-windows',
         '--disable-renderer-backgrounding',
@@ -36,6 +39,117 @@ module.exports = (on, config) => {
     );
     arguments_.extensions.push(metamaskPath);
     return arguments_;
+  });
+
+
+  on('task', {
+    error(message) {
+      console.error('\u001B[31m', 'ERROR:', message, '\u001B[0m');
+      return true;
+    },
+    warn(message) {
+      console.warn('\u001B[33m', 'WARNING:', message, '\u001B[0m');
+      return true;
+    },
+    initPuppeteer: async () => {
+      const connected = await puppeteer.init();
+      return connected;
+    },
+    assignWindows: async () => {
+      const assigned = await puppeteer.assignWindows();
+      return assigned;
+    },
+    switchToCypressWindow: async () => {
+      const switched = await puppeteer.switchToCypressWindow();
+      return switched;
+    },
+    switchToMetamaskWindow: async () => {
+      const switched = await puppeteer.switchToMetamaskWindow();
+      return switched;
+    },
+    switchToMetamaskNotification: async () => {
+      const notificationPage = await puppeteer.switchToMetamaskNotification();
+      return notificationPage;
+    },
+    confirmMetamaskWelcomePage: async () => {
+      const confirmed = await metamask.confirmWelcomePage();
+      return confirmed;
+    },
+    unlockMetamask: async password => {
+      const unlocked = await metamask.unlock(password);
+      return unlocked;
+    },
+    importMetamaskWallet: async ({ secretWords, password }) => {
+      if (process.env.SECRET_WORDS) {
+        secretWords = process.env.SECRET_WORDS;
+      }
+      const imported = await metamask.importWallet(secretWords, password);
+      return imported;
+    },
+    addMetamaskNetwork: async network => {
+      const networkAdded = await metamask.addNetwork(network);
+      return networkAdded;
+    },
+    changeMetamaskNetwork: async network => {
+      if (process.env.NETWORK_NAME) {
+        network = process.env.NETWORK_NAME;
+      } else {
+        network = 'kovan';
+      }
+      const networkChanged = await metamask.changeNetwork(network);
+      return networkChanged;
+    },
+    acceptMetamaskAccess: async () => {
+      const accepted = await metamask.acceptAccess();
+      return accepted;
+    },
+    confirmMetamaskTransaction: async () => {
+      const confirmed = await metamask.confirmTransaction();
+      return confirmed;
+    },
+    rejectMetamaskTransaction: async () => {
+      const rejected = await metamask.rejectTransaction();
+      return rejected;
+    },
+    getMetamaskWalletAddress: async () => {
+      const walletAddress = await metamask.getWalletAddress();
+      return walletAddress;
+    },
+    fetchMetamaskWalletAddress: async () => {
+      return metamask.walletAddress();
+    },
+    setupMetamask: async ({ secretWords, network, password }) => {
+      if (process.env.NETWORK_NAME) {
+        network = process.env.NETWORK_NAME;
+      }
+      if (process.env.SECRET_WORDS) {
+        secretWords = process.env.SECRET_WORDS;
+      }
+      await metamask.initialSetup({ secretWords, network, password });
+      return true;
+    },
+    snxExchangerSettle: async ({ asset, walletAddress, privateKey }) => {
+      if (process.env.PRIVATE_KEY) {
+        privateKey = process.env.PRIVATE_KEY;
+      }
+      const settled = await synthetix.settle({
+        asset,
+        walletAddress,
+        privateKey,
+      });
+      return settled;
+    },
+    snxCheckWaitingPeriod: async ({ asset, walletAddress }) => {
+      const waitingPeriod = await synthetix.checkWaitingPeriod({
+        asset,
+        walletAddress,
+      });
+      return waitingPeriod;
+    },
+    getNetwork: () => {
+      const network = helpers.getNetwork();
+      return network;
+    },
   });
 
   return config;
