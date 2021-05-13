@@ -1,22 +1,42 @@
 /// <reference types="cypress" />
-// ***********************************************************
-// This example plugins/index.js can be used to load plugins
-//
-// You can change the location of this file or turn off loading
-// the plugins file with the 'pluginsFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/plugins-guide
-// ***********************************************************
-
-// This function is called when a project is opened or re-opened (e.g. due to
-// the project's config changing)
-
+// import helpers from "../support/helpers";
+const helpers = require('../support/helpers')
 /**
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  on('before:browser:launch', async (browser = {}, arguments_) => {
+    console.log('Loading MetaMask Extension')
+    if (browser.name === 'chrome' && browser.isHeadless) {
+      console.log('TRUE'); // required by cypress ¯\_(ツ)_/¯
+      arguments_.args.push('--window-size=1920,1080');
+      return arguments_;
+    }
+
+    if (browser.name === 'electron') {
+      arguments_['width'] = 1920;
+      arguments_['height'] = 1080;
+      arguments_['resizable'] = false;
+      return arguments_;
+    }
+
+    // metamask welcome screen blocks cypress from loading
+    if (browser.name === 'chrome') {
+      arguments_.args.push(
+        '--disable-background-timer-throttling',
+        '--disable-backgrounding-occluded-windows',
+        '--disable-renderer-backgrounding',
+      );
+    }
+
+    // NOTE: extensions cannot be loaded in headless Chrome
+    const metamaskPath = await helpers.prepareMetamask(
+      process.env.METAMASK_VERSION || '9.4.0',
+    );
+    arguments_.extensions.push(metamaskPath);
+    return arguments_;
+  });
+
+  return config;
 }

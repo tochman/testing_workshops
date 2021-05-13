@@ -1,3 +1,5 @@
 **/node_modules
 node_modules
 basic_smart_contract/src/artifacts/build-info/**
+**/**/messages.json
+**/**/cypress/support/downloads/**

@@ -1,25 +1,38 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import puppeteer from "puppeteer";
+
+let puppeteerBrowser;
+let mainWindow;
+let metamaskWindow;
+
+const initializePuppeteer = async () => {
+  const debuggerDetails = await fetch('http://localhost:9222/json/version'); //DevSkim: ignore DS137138
+    const debuggerDetailsConfig = await debuggerDetails.json();
+    const webSocketDebuggerUrl = debuggerDetailsConfig.webSocketDebuggerUrl;
+
+    puppeteerBrowser = await puppeteer.connect({
+      browserWSEndpoint: webSocketDebuggerUrl,
+      ignoreHTTPSErrors: true,
+      defaultViewport: null,
+    });
+    return puppeteerBrowser.isConnected();
+}
+
+const assignWindows = async () => {
+  let pages = await puppeteerBrowser.pages();
+  for (const page of pages) {
+    if (page.url().includes('integration')) {
+      mainWindow = page;
+    } else if (page.url().includes('extension')) {
+      metamaskWindow = page;
+    }
+  }
+  return true;
+}
+
+const initiate = async () => {
+  await initializePuppeteer()
+  await assignWindows()
+}
+
+
