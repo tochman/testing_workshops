@@ -10,16 +10,18 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "typescript": "^4.2.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "craco start",
-    "start:silent": "BROWSER=none craco start",
-    "build": "craco build",
+    "start": "react-scripts start",
+    "start:silent": "BROWSER=none react-scripts  start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:hardhat": "npx hardhat test",
-    "test:e2e": "start-server-and-test 'yarn build && yarn start:silent' http-get://localhost:3000 'synpress open'"
+    "cy:open": "cypress open",
+    "test:e2e": "start-server-and-test start:silent http://localhost:3000 cy:open"
   },
   "eslintConfig": {
     "extends": [
@@ -40,10 +42,9 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^6.1.2",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "@synthetixio/synpress": "^0.8.4",
+    "@testing-library/dom": "^7.31.0",
     "chai": "^4.3.4",
     "craco-babel-loader": "^0.1.4",
     "cypress": "^7.2.0",
