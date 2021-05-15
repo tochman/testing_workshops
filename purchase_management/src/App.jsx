@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ethers } from "ethers";
 
 import detectEthereumProvider from '@metamask/detect-provider'
-import DeployConstract from "./components/DeployContract";
+import DeployContract from "./components/DeployContract";
 import ViewContract from "./components/ViewContract";
 
 // 1. Make sure that the app knows who I am
@@ -12,7 +12,6 @@ import ViewContract from "./components/ViewContract";
 const App = () => {
   const [address, setAddress] = useState("Loading...")
   const [w3provider, setW3Provider] = useState({})
-
   const requestAccount = async () => {
     const provider = await detectEthereumProvider();
     if (provider) {
@@ -23,7 +22,7 @@ const App = () => {
       return "No address can be found, please install MetaMask"
     }
   }
-
+  
   useEffect(() => {
     requestAccount().then(provider => {
       setAddress(window.ethereum.selectedAddress)
@@ -34,7 +33,7 @@ const App = () => {
     <>
       <h1 data-cy="title">Purchase Contract</h1>
       <p data-cy="address">Your address is: {address}</p>
-      <DeployConstract provider={w3provider} />
+      <DeployContract provider={w3provider} />
       <ViewContract provider={w3provider} />
     </>
   )

@@ -7,11 +7,11 @@ const DeployContract = ({ provider }) => {
   const [contract, setContract] = useState()
 
   const deployContract = async () => {
+    debugger
     const signer = provider.getSigner(window.ethereum.selectedAddress)
     const contractFactory = ContractFactory.fromSolidity(Purchase, signer)
     const contract = await contractFactory.deploy(buyerAddress)
     await contract.deployed()
-    // debugger
     setContract(contract)
   }
   return (
