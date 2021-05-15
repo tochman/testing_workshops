@@ -76,15 +76,12 @@ module.exports = {
     await page.waitForTimeout(300);
   },
 
-  // async changeAccount() {
-  //   let selector
-  //   await page.evaluate(
-  //     selector = document.querselectorSelector('.account-menu__accounts')
-  //   )
-  //   await page.evaluate(
-  //     selector.children[1].click()
-  //   )
-  // },
+  async changeAccount(page = metamaskWindow) {
+    await page.evaluate(
+      () => document.querySelector('.account-menu__accounts').children[1].click()
+    )
+
+  },
   async waitAndClick(selector, page = metamaskWindow) {
     await module.exports.waitFor(selector, page);
     await page.evaluate(

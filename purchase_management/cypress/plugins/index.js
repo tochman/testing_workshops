@@ -141,10 +141,10 @@ module.exports = (on, config) => {
       return true;
     },
     
-    // async changeAccount() {
-    //   const accountChange = await metamask.changeAccount()
-    //   return accountChange
-    // },
+    async changeAccount() {
+      const accountChange = await metamask.changeAccount()
+      return null
+    },
 
     getNetwork() {
       const network = helpers.getNetwork();

@@ -37,16 +37,16 @@ module.exports = {
       }
     }
   },
-  // async changeAccount() {
-  //   await puppeteer.waitAndClick(mainPageElements.accountMenu.button)
-  //   // await puppeteer.waitAndClickByText(
-  //   //   mainPageElements.accountMenu.accountsSelector,
-  //   //   'Account 2',
-  //   // );
-  //   // await puppeteer.waitAndClick(mainPageElements.accountMenu.secondAccount)
-  //   // await puppeteer.changeAccount()
+  async changeAccount() {
+    await puppeteer.waitAndClick(mainPageElements.accountMenu.button)
+    // await puppeteer.waitAndClickByText(
+    //   mainPageElements.accountMenu.accountsSelector,
+    //   'Account 2',
+    // );
+    // await puppeteer.waitAndClick(mainPageElements.accountMenu.secondAccount)
+    await puppeteer.changeAccount()
 
-  // },
+  },
   async confirmWelcomePage() {
     await module.exports.fixBlankPage();
     await puppeteer.waitAndClick(welcomePageElements.confirmButton);
