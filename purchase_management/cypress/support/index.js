@@ -16,6 +16,7 @@ Cypress.on('window:before:load', win => {
 });
 
 before(() => {
-  cy.setupMetamask();
+  
+  // cy.addNetwork()
 });
 

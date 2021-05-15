@@ -14,6 +14,10 @@ const popup = {
 const accountMenu = {
   button: '.account-menu__icon',
   settingsButton: '.account-menu__item--clickable:nth-child(11)',
+  accountsSection: '.account-menu__accounts',
+  firstAccount: '.account-menu__accounts:nth-child(1)',
+  secondAccount: '.account-menu__accounts:nth-child(2)',
+  accountsSelector: '.account-menu__name'
 };
 
 const settingsPage = {
@@ -44,7 +48,7 @@ const accountModal = {
   closeButton: '.account-modal__close',
 };
 
-module.exports = mainPageElements = {
+module.exports.mainPageElements = {
   networkSwitcher,
   walletOverview,
   popup,

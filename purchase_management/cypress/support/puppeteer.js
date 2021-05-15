@@ -75,6 +75,16 @@ module.exports = {
     // puppeteer going too fast breaks metamask in corner cases
     await page.waitForTimeout(300);
   },
+
+  // async changeAccount() {
+  //   let selector
+  //   await page.evaluate(
+  //     selector = document.querselectorSelector('.account-menu__accounts')
+  //   )
+  //   await page.evaluate(
+  //     selector.children[1].click()
+  //   )
+  // },
   async waitAndClick(selector, page = metamaskWindow) {
     await module.exports.waitFor(selector, page);
     await page.evaluate(
@@ -82,12 +92,14 @@ module.exports = {
       selector,
     );
   },
+
   async waitAndClickByText(selector, text, page = metamaskWindow) {
     await module.exports.waitFor(selector, page);
     await page.evaluate(() => {
       [...document.querySelectorAll(selector)]
         .find(element => element.textContent === text)
         .click();
+      console.log('attempting to click on: ' + text)
     });
   },
   async waitAndType(selector, value, page = metamaskWindow) {

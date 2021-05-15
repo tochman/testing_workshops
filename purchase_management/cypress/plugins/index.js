@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 // import helpers from "../support/helpers";
+require('dotenv').config()
 const helpers = require('../support/helpers')
 const puppeteer = require('../support/puppeteer');
 const metamask = require('../support/metamask');
@@ -17,9 +18,9 @@ module.exports = (on, config) => {
     }
 
     if (browser.name === 'electron') {
-      arguments_['width'] = 1920;
-      arguments_['height'] = 1080;
-      arguments_['resizable'] = false;
+      // arguments_['width'] = 1920;
+      // arguments_['height'] = 1080;
+      // arguments_['resizable'] = false;
       return arguments_;
     }
 
@@ -51,46 +52,52 @@ module.exports = (on, config) => {
       console.warn('\u001B[33m', 'WARNING:', message, '\u001B[0m');
       return true;
     },
-    initPuppeteer: async () => {
+    async initPuppeteer() {
       const connected = await puppeteer.init();
       return connected;
     },
-    assignWindows: async () => {
+    async assignWindows() {
       const assigned = await puppeteer.assignWindows();
       return assigned;
     },
-    switchToCypressWindow: async () => {
+    async switchToCypressWindow() {
       const switched = await puppeteer.switchToCypressWindow();
       return switched;
     },
-    switchToMetamaskWindow: async () => {
+    async switchToMetamaskWindow() {
       const switched = await puppeteer.switchToMetamaskWindow();
       return switched;
     },
-    switchToMetamaskNotification: async () => {
+    async switchToMetamaskNotification() {
       const notificationPage = await puppeteer.switchToMetamaskNotification();
       return notificationPage;
     },
-    confirmMetamaskWelcomePage: async () => {
+    async confirmMetamaskWelcomePage() {
       const confirmed = await metamask.confirmWelcomePage();
       return confirmed;
     },
-    unlockMetamask: async password => {
+    async unlockMetamask(password) {
+      if (process.env.PASSWORD) {
+        password = process.env.PASSWORD;
+      }
       const unlocked = await metamask.unlock(password);
       return unlocked;
     },
-    importMetamaskWallet: async ({ secretWords, password }) => {
+    async importMetamaskWallet({ secretWords, password }) {
       if (process.env.SECRET_WORDS) {
         secretWords = process.env.SECRET_WORDS;
+      }
+      if (process.env.PASSWORD) {
+        password = process.env.PASSWORD;
       }
       const imported = await metamask.importWallet(secretWords, password);
       return imported;
     },
-    addMetamaskNetwork: async network => {
+    async addMetamaskNetwork(network) {
       const networkAdded = await metamask.addNetwork(network);
       return networkAdded;
     },
-    changeMetamaskNetwork: async network => {
+    async changeMetamaskNetwork(network) {
       if (process.env.NETWORK_NAME) {
         network = process.env.NETWORK_NAME;
       } else {
@@ -99,57 +106,54 @@ module.exports = (on, config) => {
       const networkChanged = await metamask.changeNetwork(network);
       return networkChanged;
     },
-    acceptMetamaskAccess: async () => {
+    async acceptMetamaskAccess() {
       const accepted = await metamask.acceptAccess();
       return accepted;
     },
-    confirmMetamaskTransaction: async () => {
+    async confirmMetamaskTransaction() {
       const confirmed = await metamask.confirmTransaction();
       return confirmed;
     },
-    rejectMetamaskTransaction: async () => {
+    async rejectMetamaskTransaction() {
       const rejected = await metamask.rejectTransaction();
       return rejected;
     },
-    getMetamaskWalletAddress: async () => {
+    async getMetamaskWalletAddress() {
       const walletAddress = await metamask.getWalletAddress();
       return walletAddress;
     },
-    fetchMetamaskWalletAddress: async () => {
+    async fetchMetamaskWalletAddress() {
       return metamask.walletAddress();
     },
-    setupMetamask: async ({ secretWords, network, password }) => {
+    async setupMetamask({ secretWords, network, password }) {
       if (process.env.NETWORK_NAME) {
         network = process.env.NETWORK_NAME;
       }
       if (process.env.SECRET_WORDS) {
         secretWords = process.env.SECRET_WORDS;
       }
+      if (process.env.PASSWORD) {
+        password = process.env.PASSWORD;
+      }
+      console.log("Password: " + password)
+      console.log("Secret Words: " + secretWords)
       await metamask.initialSetup({ secretWords, network, password });
       return true;
     },
-    snxExchangerSettle: async ({ asset, walletAddress, privateKey }) => {
-      if (process.env.PRIVATE_KEY) {
-        privateKey = process.env.PRIVATE_KEY;
-      }
-      const settled = await synthetix.settle({
-        asset,
-        walletAddress,
-        privateKey,
-      });
-      return settled;
-    },
-    snxCheckWaitingPeriod: async ({ asset, walletAddress }) => {
-      const waitingPeriod = await synthetix.checkWaitingPeriod({
-        asset,
-        walletAddress,
-      });
-      return waitingPeriod;
-    },
-    getNetwork: () => {
+    
+    // async changeAccount() {
+    //   const accountChange = await metamask.changeAccount()
+    //   return accountChange
+    // },
+
+    getNetwork() {
       const network = helpers.getNetwork();
       return network;
     },
+    async addNetwork() {
+      const network = metamask.addNetwork();
+      return network;
+    }
   });
 
   return config;

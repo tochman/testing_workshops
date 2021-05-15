@@ -14,17 +14,17 @@ const totalLabel = `${confirmPageContent} div:nth-child(2) > .confirm-detail-row
 const rejectButton = `${confirmPageContent} [data-testid="page-container-footer-cancel"]`;
 const confirmButton = `${confirmPageContent} [data-testid="page-container-footer-next"]`;
 
-module.exports = notificationPageElements = {
+module.exports.notificationPageElements = {
   notificationPage,
   nextButton,
 };
 
-module.exports = permissionsPageElements = {
+module.exports.permissionsPageElements = {
   permissionsPage,
   connectButton,
 };
 
-module.exports = confirmPageElements = {
+module.exports.confirmPageElements = {
   notificationPage,
   confirmPageHeader,
   confirmPageContent,

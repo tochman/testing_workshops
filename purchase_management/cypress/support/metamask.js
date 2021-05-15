@@ -37,12 +37,23 @@ module.exports = {
       }
     }
   },
+  // async changeAccount() {
+  //   await puppeteer.waitAndClick(mainPageElements.accountMenu.button)
+  //   // await puppeteer.waitAndClickByText(
+  //   //   mainPageElements.accountMenu.accountsSelector,
+  //   //   'Account 2',
+  //   // );
+  //   // await puppeteer.waitAndClick(mainPageElements.accountMenu.secondAccount)
+  //   // await puppeteer.changeAccount()
+
+  // },
   async confirmWelcomePage() {
     await module.exports.fixBlankPage();
     await puppeteer.waitAndClick(welcomePageElements.confirmButton);
     return true;
   },
-  async unlock(password){
+
+  async unlock(password) {
     await module.exports.fixBlankPage();
     await puppeteer.waitAndType(unlockPageElements.passwordInput, password);
     await puppeteer.waitAndClick(unlockPageElements.unlockButton);
@@ -165,14 +176,20 @@ module.exports = {
       mainPageElements.addNetworkPage.chainIdInput,
       network.chainId,
     );
-    await puppeteer.waitAndType(
-      mainPageElements.addNetworkPage.symbolInput,
-      network.symbol,
-    );
-    await puppeteer.waitAndType(
-      mainPageElements.addNetworkPage.blockExplorerInput,
-      network.blockExplorer,
-    );
+
+    if (network.symbol) {
+      await puppeteer.waitAndType(
+        mainPageElements.addNetworkPage.symbolInput,
+        network.symbol,
+      );
+    }
+
+    if (network.blockExplorer) {
+      await puppeteer.waitAndType(
+        mainPageElements.addNetworkPage.blockExplorerInput,
+        network.blockExplorer,
+      );
+    }
     await puppeteer.waitAndClick(mainPageElements.addNetworkPage.saveButton);
     await puppeteer.waitAndClick(mainPageElements.networksPage.closeButton);
     await puppeteer.waitForText(
@@ -246,10 +263,12 @@ module.exports = {
     await puppeteer.init();
     await puppeteer.assignWindows();
     await puppeteer.metamaskWindow().waitForTimeout(1000);
+    await puppeteer.metamaskWindow().bringToFront()
     if (
       (await puppeteer.metamaskWindow().$(unlockPageElements.unlockPage)) ===
       null
     ) {
+
       await module.exports.confirmWelcomePage();
       await module.exports.importWallet(secretWords, password);
       if (isCustomNetwork) {

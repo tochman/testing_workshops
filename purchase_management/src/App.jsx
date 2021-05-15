@@ -33,7 +33,7 @@ const App = () => {
   return (
     <>
       <h1 data-cy="title">Purchase Contract</h1>
-      <p>Your address is: {address}</p>
+      <p data-cy="address">Your address is: {address}</p>
       <DeployConstract provider={w3provider} />
       <ViewContract provider={w3provider} />
     </>
