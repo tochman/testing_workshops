@@ -18,16 +18,16 @@ module.exports = (on, config) => {
     }
 
     if (browser.name === 'electron') {
-      // arguments_['width'] = 1920;
-      // arguments_['height'] = 1080;
-      // arguments_['resizable'] = false;
+      arguments_['width'] = 1920;
+      arguments_['height'] = 1080;
+      arguments_['resizable'] = false;
       return arguments_;
     }
 
     // metamask welcome screen blocks cypress from loading
     if (browser.name === 'chrome') {
       arguments_.args.push(
-        '--auto-open-devtools-for-tabs',
+        // '--auto-open-devtools-for-tabs',
         '--remote-debugging-port=9222',
         '--disable-background-timer-throttling',
         '--disable-backgrounding-occluded-windows',

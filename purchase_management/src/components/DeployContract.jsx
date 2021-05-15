@@ -16,19 +16,21 @@ const DeployContract = ({ provider }) => {
   }
   return (
     <>
-      { contract?
-        <>
+      { contract ?
+        <div data-cy="status-message">
           <h2>You contract was deployed. {contract.address}</h2>
-        </>
+        </div>
         :
         <>
           <label htmlFor="buyer-address">ADDRESS</label>
           <input
             type="text"
             id="buyer-address"
+            data-cy="buyer-address"
             onChange={e => setBuyerAddress(e.target.value)}
           />
           <button
+            data-cy="deploy-contract"
             onClick={() => deployContract()}
           >DEPLOY</button>
         </>
