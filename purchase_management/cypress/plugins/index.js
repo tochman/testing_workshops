@@ -94,6 +94,11 @@ module.exports = (on, config) => {
       const imported = await metamask.importWallet(secretWords, password);
       return imported;
     },
+    async importMetaMaskWalletUsingPrivateKey({ key }) {
+      console.log('In plugin:' + key)
+      const imported = await metamask.importMetaMaskWalletUsingPrivateKey(key);
+      return imported
+    },
     async addMetamaskNetwork(network) {
       const networkAdded = await metamask.addNetwork(network);
       return networkAdded;
@@ -141,7 +146,7 @@ module.exports = (on, config) => {
       await metamask.initialSetup({ secretWords, network, password });
       return true;
     },
-    
+
     async changeAccount() {
       const accountChange = await metamask.changeAccount()
       return null

@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { ethers } from "ethers";
-
+import { MDBContainer } from "mdbreact";
 import detectEthereumProvider from '@metamask/detect-provider'
 import DeployContract from "./components/DeployContract";
 import ViewContract from "./components/ViewContract";
 
-// 1. Make sure that the app knows who I am
-// 2. Build an interface to input the Buyers address and get the info needed to deploy the contract
-// 3. Deploy the Purchase contract (validate the address beforehand?)
-
 const App = () => {
   const [address, setAddress] = useState("Loading...")
   const [w3provider, setW3Provider] = useState({})
+  
   const requestAccount = async () => {
     const provider = await detectEthereumProvider();
     if (provider) {
@@ -29,13 +26,14 @@ const App = () => {
       setW3Provider(provider)
     })
   }, [])
+
   return (
-    <>
+    <MDBContainer>
       <h1 data-cy="title">Purchase Contract</h1>
       <p data-cy="address">Your address is: {address}</p>
       <DeployContract provider={w3provider} />
       <ViewContract provider={w3provider} />
-    </>
+    </MDBContainer>
   )
 }
 

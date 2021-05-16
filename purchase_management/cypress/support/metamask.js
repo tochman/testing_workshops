@@ -39,14 +39,24 @@ module.exports = {
   },
   async changeAccount() {
     await puppeteer.waitAndClick(mainPageElements.accountMenu.button)
-    // await puppeteer.waitAndClickByText(
-    //   mainPageElements.accountMenu.accountsSelector,
-    //   'Account 2',
-    // );
-    // await puppeteer.waitAndClick(mainPageElements.accountMenu.secondAccount)
     await puppeteer.changeAccount()
 
   },
+
+  async importMetaMaskWalletUsingPrivateKey(key) {
+    // interact with the MM extension
+    console.log('In Metamask.js:' + key)
+
+    await puppeteer.waitAndClick(mainPageElements.accountMenu.button);
+    console.log('Opened the menu')
+    await puppeteer.waitAndClickByText('.account-menu__item__text', 'Import Account')
+    console.log('Clicked on Import Account')
+    // await puppeteer.waitAndClick(mainPageElements.accountMenu.importAccount); 
+    await puppeteer.waitAndType('#private-key-box', key)
+    await puppeteer.waitAndClick('.new-account-create-form__button')
+    return true
+  },
+
   async confirmWelcomePage() {
     await module.exports.fixBlankPage();
     await puppeteer.waitAndClick(welcomePageElements.confirmButton);
@@ -90,6 +100,9 @@ module.exports = {
     }
     return true;
   },
+
+
+
   async changeNetwork(network) {
     setNetwork(network);
     await puppeteer.waitAndClick(mainPageElements.networkSwitcher.button);

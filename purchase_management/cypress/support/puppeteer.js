@@ -68,6 +68,7 @@ module.exports = {
     }
   },
   async waitFor(selector, page = metamaskWindow) {
+    console.log('inside waitFor')
     await page.waitForFunction(
       `document.querySelector('${selector}') && document.querySelector('${selector}').clientHeight != 0`,
       { visible: true },
@@ -80,8 +81,8 @@ module.exports = {
     await page.evaluate(
       () => document.querySelector('.account-menu__accounts').children[1].click()
     )
-
   },
+
   async waitAndClick(selector, page = metamaskWindow) {
     await module.exports.waitFor(selector, page);
     await page.evaluate(
@@ -91,12 +92,12 @@ module.exports = {
   },
 
   async waitAndClickByText(selector, text, page = metamaskWindow) {
+    console.log('inside waitAndClickByText')
     await module.exports.waitFor(selector, page);
-    await page.evaluate(() => {
-      [...document.querySelectorAll(selector)]
+    await page.evaluate((selector, text) => {      
+      return [...document.querySelectorAll(selector)]
         .find(element => element.textContent === text)
         .click();
-      console.log('attempting to click on: ' + text)
     });
   },
   async waitAndType(selector, value, page = metamaskWindow) {

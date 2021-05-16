@@ -17,7 +17,8 @@ const accountMenu = {
   accountsSection: '.account-menu__accounts',
   firstAccount: '.account-menu__accounts:nth-child(1)',
   secondAccount: '.account-menu__accounts:nth-child(2)',
-  accountsSelector: '.account-menu__name'
+  accountsSelector: '.account-menu__name',
+  importAccount: '.account-menu__item account-menu__item--clickable'
 };
 
 const settingsPage = {

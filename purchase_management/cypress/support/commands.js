@@ -17,6 +17,13 @@ Cypress.Commands.add(
   },
 );
 
+Cypress.Commands.add(
+  'importMetaMaskWalletUsingPrivateKey',
+  (key) => {
+    return cy.task('importMetaMaskWalletUsingPrivateKey', { key });
+  },
+);
+
 Cypress.Commands.add('addMetamaskNetwork', network => {
   return cy.task('addMetamaskNetwork', network);
 });
