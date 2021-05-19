@@ -1,89 +1,25 @@
-Cypress.Commands.add('initPuppeteer', () => {
-  return cy.task('initPuppeteer');
-});
-
-Cypress.Commands.add('assignWindows', () => {
-  return cy.task('assignWindows');
-});
-
-Cypress.Commands.add('confirmMetamaskWelcomePage', () => {
-  return cy.task('confirmMetamaskWelcomePage');
-});
-
-Cypress.Commands.add(
-  'importMetamaskWallet',
-  (secretWords, password) => {
-    return cy.task('importMetamaskWallet', { secretWords, password });
-  },
-);
-
-Cypress.Commands.add(
-  'importMetaMaskWalletUsingPrivateKey',
-  (key) => {
-    return cy.task('importMetaMaskWalletUsingPrivateKey', { key });
-  },
-);
-
-Cypress.Commands.add('addMetamaskNetwork', network => {
-  return cy.task('addMetamaskNetwork', network);
-});
-
-Cypress.Commands.add('changeMetamaskNetwork', network => {
-  return cy.task('changeMetamaskNetwork', network);
-});
-
-Cypress.Commands.add('getMetamaskWalletAddress', () => {
-  cy.task('getMetamaskWalletAddress').then(address => {
-    return address;
-  });
-});
-
-Cypress.Commands.add('switchToCypressWindow', () => {
-  return cy.task('switchToCypressWindow');
-});
-
-Cypress.Commands.add('switchToMetamaskWindow', () => {
-  return cy.task('switchToMetamaskWindow');
-});
-
-Cypress.Commands.add('acceptMetamaskAccess', () => {
-  return cy.task('acceptMetamaskAccess');
-});
-
-Cypress.Commands.add('confirmMetamaskTransaction', () => {
-  return cy.task('confirmMetamaskTransaction');
-});
-
-Cypress.Commands.add('rejectMetamaskTransaction', () => {
-  return cy.task('rejectMetamaskTransaction');
-});
-
-Cypress.Commands.add('switchToMetamaskNotification', () => {
-  return cy.task('switchToMetamaskNotification');
-});
-
-Cypress.Commands.add('unlockMetamask', (password) => {
-  return cy.task('unlockMetamask', password);
-});
-
-Cypress.Commands.add('fetchMetamaskWalletAddress', () => {
-  cy.task('fetchMetamaskWalletAddress').then(address => {
-    return address;
-  });
-});
-
-Cypress.Commands.add(
-  'setupMetamask',
-  (secretWords, network, password) => {
-    return cy.task('setupMetamask', { secretWords, network, password });
-  },
-);
-
-Cypress.Commands.add('getNetwork', () => {
-  return cy.task('getNetwork');
-});
-
-Cypress.Commands.add('changeAccount', () => {
-  return cy.task('changeAccount')
-})
-
+// ***********************************************
+// This example commands.js shows you how to
+// create various custom commands and overwrite
+// existing commands.
+//
+// For more comprehensive examples of custom
+// commands please read more here:
+// https://on.cypress.io/custom-commands
+// ***********************************************
+//
+//
+// -- This is a parent command --
+// Cypress.Commands.add('login', (email, password) => { ... })
+//
+//
+// -- This is a child command --
+// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
+//
+//
+// -- This is a dual command --
+// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
+//
+//
+// -- This will overwrite an existing command --
+// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })

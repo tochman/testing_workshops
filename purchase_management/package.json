@@ -50,15 +50,11 @@
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@testing-library/dom": "^7.31.0",
     "chai": "^4.3.4",
-    "craco-babel-loader": "^0.1.4",
-    "cross-zip": "^4.0.0",
     "cypress": "^7.2.0",
+    "cypress-metamask": "^1.0.1-development",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.1.4",
     "hardhat": "^2.2.1",
-    "node-fetch": "^2.6.1",
-    "puppeteer": "^9.1.1",
-    "puppeteer-core": "^9.1.1",
     "start-server-and-test": "^1.12.1"
   }
 }

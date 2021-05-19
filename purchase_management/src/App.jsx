@@ -12,7 +12,7 @@ const App = () => {
   const requestAccount = async () => {
     const provider = await detectEthereumProvider();
     if (provider) {
-      !provider.isConnected() && await window.ethereum.enable()
+      !provider.isConnected() &&  await window.ethereum.request('eth_requestAccounts')
       const web3Provider = new ethers.providers.Web3Provider(window.ethereum)
       return web3Provider
     } else {
