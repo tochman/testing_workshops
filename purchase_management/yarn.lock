@@ -1357,7 +1357,7 @@
     "@ethersproject/abi" "^5.0.1"
     ethers "^5.0.1"
 
-"@ethereum-waffle/provider@^3.3.0", "@ethereum-waffle/provider@^3.3.1":
+"@ethereum-waffle/provider@^3.3.0", "@ethereum-waffle/provider@^3.3.1", "@ethereum-waffle/provider@^3.3.2":
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/@ethereum-waffle/provider/-/provider-3.3.2.tgz#33677baf6af5cbb087c3072d84f38c152968ebb1"
   integrity sha512-ilz6cXK0ylSKCmZktTMpY4gjo0CN6rb86JfN7+RZYk6tKtZA6sXoOe95skWEQkGf1fZk7G817fTzLb0CmFDp1g==
@@ -8318,7 +8318,7 @@ ethereumjs-wallet@0.6.5:
     utf8 "^3.0.0"
     uuid "^3.3.2"
 
-ethers@^5.0.0, ethers@^5.0.1, ethers@^5.0.2, ethers@^5.1.4:
+ethers@^5.0.0, ethers@^5.0.1, ethers@^5.0.19, ethers@^5.0.2, ethers@^5.1.4:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-5.3.0.tgz#1ec14d09c461e8f2554b00cd080e94a3094e7e9d"
   integrity sha512-myN+338S4sFQZvQ9trii7xit8Hu/LnUtjA0ROFOHpUreQc3fgLZEMNVqF3vM1u2D78DIIeG1TbuozVCVlXQWvQ==
@@ -13138,6 +13138,13 @@ mocha@^7.1.2:
     yargs "13.3.2"
     yargs-parser "13.1.2"
     yargs-unparser "1.6.0"
+
+mock-ethers-provider@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/mock-ethers-provider/-/mock-ethers-provider-1.0.2.tgz#e63966d9c3f088987c9f47b52b2c7e9a5157de68"
+  integrity sha512-bxNEAGoHpjOi8Used1GUfT/rT42UekmbsByxyEdcZRlr7zZwxoL0ONIS9pgWkpWcSzqzzQvlElNblyUK/FqcXg==
+  dependencies:
+    ethers "^5.0.19"
 
 mock-fs@^4.1.0:
   version "4.14.0"
@@ -18688,7 +18695,7 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^4.2.4:
+typescript@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.2.tgz#399ab18aac45802d6f2498de5054fcbbe716a805"
   integrity sha512-zZ4hShnmnoVnAHpVHWpTcxdv7dWP60S2FsydQLV8V5PbS3FifjWFFRiHSWpDJahly88PRyV5teTSLoq4eG7mKw==
