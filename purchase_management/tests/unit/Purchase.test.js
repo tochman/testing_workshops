@@ -1,9 +1,11 @@
+/* eslint-disable jest/valid-expect */
+/* eslint-disable jest/valid-describe */
 const { expect } = require('chai')
 const { waffle } = require('hardhat')
 const Purchase = require('../../src/artifacts/contracts/Purchase.sol/Purchase.json')
 
 let contract
-describe('Purchase', async () => {
+describe('Purchase', () => {
   const [serviceProvider, buyer, randomWallet] = waffle.provider.getWallets()
 
   beforeEach(async () => {
@@ -30,6 +32,7 @@ describe('Purchase', async () => {
   // });
 
   describe('Buyer can initiate the purchase process', () => {
+    let requiredService, expectedrequiredService
     describe('and pass in reqested service', () => {
       beforeEach(async () => {
         await contract.connect(buyer).initiate('Software Development', 10, 'h')
@@ -63,7 +66,7 @@ describe('Purchase', async () => {
   });
 
   describe('Sad path cases', () => {
-    describe('Random Wallet can NOT initiate the purchase process as Buyes', async () => {
+    describe('Random Wallet can NOT initiate the purchase process as Buyer', async () => {
       it('is expected to be reverted with message', async () => {
         await expect(
           contract.connect(randomWallet).initiate('Software Development', 10, 'h')

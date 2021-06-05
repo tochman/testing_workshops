@@ -1,25 +1,19 @@
+/* eslint-disable no-undef */
 describe('User can load page', () => {
   let contractAddress
   before(() => {
     cy.setupMetamask();
-    cy.changeMetamaskNetwork('localhost')
-    cy.fetchMetamaskWalletAddress().then(address => cy.log("Address" + address))
+    // cy.changeMetamaskNetwork('localhost')
     // cy.switchToMetamaskWindow()
-    // cy.changeAccount()
-    // cy.importMetaMaskWalletUsingPrivateKey('0xdd2fd4581271e230360230f9337d5c0430bf44c0')
+    // cy.importMetaMaskWalletUsingPrivateKey('0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d')
+    // cy.changeAccount(2)
     // cy.switchToCypressWindow()
-    cy.reload()
-    cy.visit('/', {
-      onLoad(win) {
-        // win.ethereum.enable()
-        // win.location.reload()
-      },
-    })
+    cy.visit('/')
   });
 
   it('is expected to display the local wallet address', () => {
     cy.get('[data-cy=title]').should('contain.text', 'Purchase Contract')
-    cy.get('[data-cy=address]').should('contain.text', 'Your address is: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266')
+    cy.get('[data-cy=address]').should('contain.text', 'Your address is: 0x70997970c51812dc3a010c7d01b50e0d17dc79c8')
   });
 
   context('deploying a contract', () => {
