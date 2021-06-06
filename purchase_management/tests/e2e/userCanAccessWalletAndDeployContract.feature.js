@@ -5,9 +5,7 @@ describe("User can load page", () => {
   before(() => {
     cy.setupMetamask();
     cy.changeMetamaskNetwork("localhost");
-    cy.switchToMetamaskWindow();
     cy.changeAccount(1);
-    cy.switchToCypressWindow();
     cy.visit("/");
   });
 
@@ -40,12 +38,10 @@ describe("User can load page", () => {
 
   context("fetching a contract", () => {
     before(() => {
-      cy.switchToMetamaskWindow();
       cy.importMetaMaskWalletUsingPrivateKey(
         "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"
       );
       cy.changeAccount(2);
-      cy.switchToCypressWindow();
       cy.get("[data-cy=fetch-contract-address]").type(contractAddress);
       cy.get("[data-cy=fetch-contract]").click();
     });

@@ -23,9 +23,7 @@
     "eject": "react-scripts eject",
     "test:hardhat": "npx hardhat test",
     "cy:open": "CYPRESS_REMOTE_DEBUGGING_PORT=9222 cypress open",
-    "cy:run": "CYPRESS_REMOTE_DEBUGGING_PORT=9222 cypress run --headed --browser chrome",
-    "test:e2e": "start-server-and-test start:silent http://localhost:3000 cy:run",
-    "test:e2e:dev": "start-server-and-test start:silent http://localhost:3000 cy:open"
+    "cy:run": "CYPRESS_REMOTE_DEBUGGING_PORT=9222 cypress run --headed --browser chrome"
   },
   "eslintConfig": {
     "extends": [
@@ -52,7 +50,7 @@
     "@testing-library/dom": "^7.31.0",
     "chai": "^4.3.4",
     "cypress": "^7.2.0",
-    "cypress-metamask": "^1.0.4-development",
+    "cypress-metamask": "^1.0.5-development",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.1.4",
     "hardhat": "^2.2.1",
