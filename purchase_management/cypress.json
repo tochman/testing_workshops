@@ -1,0 +1,7 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "chromeWebSecurity": true,
+  "fileServerFolder": "tests/e2e",
+  "fixturesFolder": "tests/e2e/fixtures",
+  "integrationFolder": "tests/e2e"
+}
